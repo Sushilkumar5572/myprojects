@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% block title %}| Edit{% endblock title %}
+
+{% block content %}
+<h1>Edit a contact.</h1>
+
+{% if contacts %}
+<center>
+        <div style="display: flex; justify-content: center;">
+                <ol class="list-group list-group-numbered">
+                        {% for contact in contacts %}
+                        <li class="list-group-item">
+                                <a class="item" href="{{ contact.get_absolute_url }}">{{ contact.name }}</a>
+                        </li>
+                        {% endfor %}
+                </ol>
+        </div>
+</center>
+{% else %}
+<center><h3>Currently the List is empty. <a href="{% url "addnew" %}">click here</a> to add new.</h3></center>
+{% endif %}
+
+<script>
+        document.getElementById('edit').classList.add('mystyle');
+</script>
+
+{% endblock content %}

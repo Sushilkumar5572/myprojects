@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+
+{% block title %}| Delete{% endblock title %}
+
+{% block content %}
+<h1>Deleting page.</h1>
+{% if contacts %}
+<div style="display: flex; justify-content: center;">
+        <ol class="list-group list-group-numbered ">
+                {% for contact in contacts %}
+                <li onclick="deleteContact(event.target.id)" id="{{ contact.id }}" class="list-group-item item">{{ contact.name }}</li>
+                {% endfor %}
+        </ol>
+</div>
+{% else %}
+<center><h3>List is already empty. <a href="{% url "addnew" %}">click here</a> to add new.</h3></center>
+{% endif %}
+<script>
+        function deleteContact(name) {
+                var name = name;
+                choice = confirm('Do you really want to delete this contact.');
+                if (choice) {
+                        postData('deletecontact', name);
+                }
+                else {
+                        console.log(choice);
+                }
+                return;
+        }
+
+        function postData(path, params) {
+
+                // Create form 
+                const hidden_form = document.createElement('form');
+
+                // Set method to post by default 
+                hidden_form.method = 'post';
+
+                // Set path 
+                hidden_form.action = path;
+                
+                const data = document.createElement('input');
+                data.type = 'hidden';
+                data.name = 'id';
+                data.value = params;
+                hidden_form.appendChild(data);
+
+                document.body.appendChild(hidden_form);
+                
+                hidden_form.submit();
+        } 
+        
+</script>
+<script>
+        document.getElementById('delete').classList.add('mystyle');
+</script>
+{% endblock content %}

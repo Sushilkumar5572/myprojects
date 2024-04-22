@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block title %}| {{ contact.name }}{% endblock title %}
+
+{% block content %}
+
+<center>
+        {% if contact %}
+        <h1>Name :- {{ contact.name }}</h1><br>
+        <h3>Email :- <a href="mailto:{{ contact.email }}">{{ contact.email }}</a></h3><br>
+        <h3>Address :- {{ contact.address }}</h3><br>
+        <h3>Phone :- <a href="tel:{{ contact.phone }}">{{ contact.phone }}</a></h3><br>
+        <a href="{% url "home" %}"><button class="button">Go Back</button></a>
+        <a href="{{ contact.get_absolute_url }}"><button class="button">Edit</button></a>
+        {% endif %}
+</center>
+
+<script>
+        document.getElementById('home').classList.add('mystyle');
+</script>
+{% endblock content %}
